@@ -35,7 +35,7 @@ public class Connection extends Thread {
                 devices.add(new Device(name,socket,input,output));
             }
         } catch (Exception e) {
-            e.printStackTrace();
+
         }
     }
 

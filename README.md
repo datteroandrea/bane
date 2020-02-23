@@ -61,7 +61,7 @@ Initially you will be welcomed by the Bane interface there you can choose to use
     - [ ] inject [apk/...] path
 - [ ] Shell Interface
     - [x] start
-    - [ ] start <port>
+    - [x] start <port>
     - [x] show
     - [x] select
     - [x] track
@@ -71,10 +71,7 @@ Initially you will be welcomed by the Bane interface there you can choose to use
     - [ ] keylog
     - [x] name
     - [ ] sms
+        - [ ] sendsms
+        - [ ] getsms
     - [ ] download <file path>
     - [ ] upload <end path>
-
-
-# Issues
-
-- [ ] File transfer
