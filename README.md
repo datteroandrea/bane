@@ -51,6 +51,11 @@ Initially you will be welcomed by the Bane interface there you can choose to use
 `build [apk/exe]` Builds the bane application<br>
 `inject [apk/exe] path` Injects bane inside an application
 
+# Backdoor Supported Platforms
+
+- [Android](https://github.com/datteroandrea/banedroid) (currently under development but still open for Alpha tests) 
+- Windows (not quite yet)
+- Linux/Max OS (not quite yet)
 
 # TODO
 
