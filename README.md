@@ -34,16 +34,22 @@ Initially you will be welcomed by the Bane interface there you can choose to use
 
 #### Shell Interface
 
-`start <port>` Creates the server at the specified address and port both are optional<br>
+
+`start (port)` Creates the server at the specified port (optional)<br>
 `show` Shows the devices connected to the bane service<br>
+`sysinfo` Get system info about the device<br>
 `select <name>` Selects the device<br>
 `track` Tracks the current position of the device<br>
-`shell` Starts a remote shell<br>
-`sexit` Closes the remote shell<br>
+`sopen` Starts a remote shell<br>
+`sclose` Closes the remote shell<br>
 `news` Returns the notifications<br>
-`keylog` Keylogs the device<br>
+`keylog` Keylogs the device (In development)<br>
+`photo` Take photo (In development)<br>
+`record -d <time>` Record audio (In development)<br>
+`video -d <time>` Record video (In development)<br>
 `name <new name>` Changes the name of the current device<br>
-`sms` Returns all the sms of the device
+`sendsms number \"text\"` Sends a message to a number<br>
+`dump [sms/contacts/calls]` Get all sms/contacts/calls
 
 #### RAT Interface
 
@@ -64,19 +70,3 @@ Initially you will be welcomed by the Bane interface there you can choose to use
     - [ ] set <address> <port>
     - [ ] build [apk/exe]
     - [ ] inject [apk/...] path
-- [ ] Shell Interface
-    - [x] start
-    - [x] start <port>
-    - [x] show
-    - [x] select
-    - [x] track
-    - [x] sopen
-    - [x] sclose
-    - [ ] news
-    - [ ] keylog
-    - [x] name
-    - [ ] sms
-        - [ ] sendsms
-        - [ ] getsms
-    - [ ] download <file path>
-    - [ ] upload <end path>

