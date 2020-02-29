@@ -47,6 +47,9 @@ Initially you will be welcomed by the Bane interface there you can choose to use
 `photo` Take photo (In development)<br>
 `record -d <time>` Record audio (In development)<br>
 `video -d <time>` Record video (In development)<br>
+`upload <path>` Uploads a file (Testing...)<br>
+`download <path>` Downloads a file (Testing...)<br>
+`video -d <time>` Record video (In development)<br>
 `name <new name>` Changes the name of the current device<br>
 `sendsms number \"text\"` Sends a message to a number<br>
 `dump [sms/contacts/calls]` Get all sms/contacts/calls
