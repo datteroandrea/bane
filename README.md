@@ -65,8 +65,10 @@ Initially you will be welcomed by the Bane interface there you can choose to use
 
 # TODO
 
-- [ ] Authentication
 - [ ] RAT Interface
     - [ ] set <address> <port>
     - [ ] build [apk/exe]
     - [ ] inject [apk/...] path
+- [ ] Shell Interface
+    - [ ] upload
+    - [ ] download
