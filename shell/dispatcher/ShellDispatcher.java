@@ -57,12 +57,14 @@ public class ShellDispatcher extends Dispatcher {
                 if(file.exists()){
                     String filename = file.getName();
                     try {
-                        byte[] fileBytes = Base64.getEncoder().encode(Files.readAllBytes(Paths.get("file")));
+                        byte[] fileBytes = Base64.getEncoder().encode(Files.readAllBytes(Paths.get(path)));
                         this.connection.send(new BaneObject(BaneCode.REQUEST, "", new BaneValue[]{
+                                new BaneValue<String>("command", "upload"),
                                 new BaneValue<String>("filename", filename),
                                 new BaneValue<String>("file", new String(fileBytes))
                         }));
                     } catch (Exception e) {
+                        e.printStackTrace();
                         shell.print_nok(e.getMessage());
                     }
                 } else {
@@ -85,8 +87,8 @@ public class ShellDispatcher extends Dispatcher {
                                 file.createNewFile();
                                 FileOutputStream fos = new FileOutputStream(file);
                                 for (int j = 0; j < response.values.length; j++) {
-                                    if(response.values[i].key.equals("file")){
-                                        fos.write(Base64.getDecoder().decode(((String)response.values[i].value).getBytes()));
+                                    if(response.values[j].key.equals("file")){
+                                        fos.write(Base64.getDecoder().decode(((String)response.values[j].value).getBytes()));
                                         fos.flush();
                                         fos.close();
                                         break;

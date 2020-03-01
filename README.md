@@ -73,5 +73,5 @@ Initially you will be welcomed by the Bane interface there you can choose to use
     - [ ] build [apk/exe]
     - [ ] inject [apk/...] path
 - [ ] Shell Interface
-    - [ ] upload
+    - [x] upload
     - [ ] download
